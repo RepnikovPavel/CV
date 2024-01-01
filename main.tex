@@ -1,0 +1,312 @@
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
+
+
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge Pavel Repnikov \vspace{2pt}} & % row = 1, col = 1
+  Location: Moscow, Russia \\ % row = 1, col = 2
+  \href{https://github.com/RepnikovPavel}{\uline{GitHub}} $|$ % row = 2, col = 1
+%   \href{https://leetcode.com/AverageArrayEnjoyer}{\uline{Leetcode}} & % row = 2, col = 1
+  Email: \href{mailto:prepnik@mail.ru}{\uline{prepnik@mail.ru}} $|$ % row = 2, col = 2
+  Mobile: +79888639559 \\ % row = 2, col = 2
+\end{tabular*}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
+
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+    \resumeSectionType{Languages}{:}{C++, Python}
+    \resumeSectionType{Frameworks}{:}{Unreal Engine, Unity, Pytorch}
+    \resumeSectionType{Libraries}{:}{numpy, pandas, SciPy, PySR, PyClustering, XGBoost, LightGBM,CatBoost,numba, sklearn}
+    \resumeSectionType{Auxiliary tools}{:}{HTML, CSS, javascript, SQL}
+    % \resumeSectionType{Databases}{:}{MongoDB, PostgreSQL}
+    % \resumeSectionType{Dev Tools}{:}{Visual Studio Code, Git, Gitlab}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+% %-----------EXPERIENCE-----------------------
+% % Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+% \section{Experience}
+% \resumeHeadingListStart{}
+%   \resumeQuadHeading{Web Developer}{Apr 2022 -- Present}
+%   {Anycompany}{Remote -- AnyCity, Anystate, Anycountry}
+%     \resumeItemListStart{}
+%       \resumeItem{Designed and developed dynamic and responsive websites using \textbf{HTML, CSS, JavaScript, and PHP}}
+%       \resumeItem{Worked with \textbf{REST APIs} to retrieve and display data from databases}
+%       \resumeItem{Improved \textbf{website performance} and speed through optimization techniques by \textbf{55\%}}
+%     \resumeItemListEnd{}
+
+%   \resumeQuadHeading{Backend Developer}{Aug 2021 -- Nov 2022}
+%   {Anycompany}{Anycity, Anystate, Anycountry}
+%     \resumeItemListStart{}
+%       \resumeItem{Worked with \textbf{MVC frameworks} to develop robust and scalable backends}
+%       \resumeItem{Troubleshot and \textbf{fixed bugs} and issues in the backend to ensure \textbf{smooth operation} of the applications}
+%     \resumeItemListEnd{}
+
+%   \resumeQuadHeadingChild{Backend Developer Intern}{Jan 2021 -- Aug 2021}
+%     \resumeItemListStart{}
+%       \resumeItem{Assisted senior web developers in the design and development of websites using \textbf{HTML, CSS, and JavaScript}}
+%     \resumeItemListEnd{}
+% \resumeHeadingListEnd{}
+% %---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+% Mention your CGPA, if its good, in the first row of second column
+
+\section{Education}
+  \resumeHeadingListStart{}
+  
+    \resumeQuadHeading{Lomonosov Moscow State University}{Moscow, Russia}
+    {MSc in Physics,Chair of Mathematical Modeling and Computer Science}{2022-2024}
+
+    \resumeQuadHeading{Lomonosov Moscow State University}{Moscow, Russia}
+    {BSc in Physics,Chair of Mathematical Modeling and Computer Science}{2018-2022}
+
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------PROJECTS--------------------------
+% Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
+\section{Projects in development}
+\resumeHeadingListStart{}
+\textbf{Adaptive metabolic model}
+\resumeHeadingListEnd{}
+
+\resumeItemListStart{}
+\resumeItem{Monte Carlo simulation}
+\resumeItem{Time series clustering}
+\resumeItemListEnd{}
+
+
+\resumeHeadingListStart{}
+\textbf{Adaptive control system with fuzzy logic based on Bayesian inference}
+\resumeHeadingListEnd{}
+
+\resumeItemListStart{}
+\resumeItem{Cross-entropy method for reinforcement learning}
+\resumeItem{Creating a greedy optimization algorithm for physical simulation}
+\resumeItem{Creating an analogue of the gradient descent algorithm in the function space}
+\resumeItemListEnd{}
+
+
+\section{Completed projects}
+
+  \resumeHeadingListStart{}
+    % \resumeTrioHeading{{Furniture object detection}{C#, Unity, Python, Pytorch}{\href{https://github.com/RepnikovPavel/FurnitureDetection}{\uline{source code, solution overview}}}
+        \resumeTrioHeading{\href{https://github.com/RepnikovPavel/FinancialData}{\uline{Credit Scoring on a synthetic dataset}}}{Python, XGBoost, LightGBM, CatBoost, PyClustering, SciPy}{\href{https://github.com/RepnikovPavel/FinancialData}{\uline{source code}}}
+    \resumeItemListStart{}
+    \resumeItem{The divide and conquer principle. Building models independently for different years}
+    \resumeItem{Automatic feature generation}
+    \resumeItem{Testing statistical hypotheses}
+    \resumeItem{Clustering of tabular data}
+    \resumeItemListEnd{}
+
+
+  \resumeHeadingListStart{}
+    % \resumeTrioHeading{{Furniture object detection}{C#, Unity, Python, Pytorch}{\href{https://github.com/RepnikovPavel/FurnitureDetection}{\uline{source code, solution overview}}}
+        \resumeTrioHeading{\href{https://github.com/RepnikovPavel/FurnitureDetection}{\uline{Furniture object detection}}}{ SQL,C\#, Unity, Python, Pytorch}{\href{https://github.com/RepnikovPavel/FurnitureDetection}{\uline{source code}}}
+    \resumeItemListStart{}
+    \resumeItem{Creating a synthetic dataset using Unity}
+    \resumeItem{Object detection finetuning using Pytorch}
+    \resumeItemListEnd{}
+  
+    \resumeTrioHeading{\href{https://drive.google.com/drive/u/0/folders/1zftI7n1gPzwnwDx0ypsb0sOc0G7IpfPW}{\uline{Bayesian Decision Making as a Theoretical Basis for a New Look at Fuzzy Logic Control}}}{Python, Pytorch}{\href{https://github.com/RepnikovPavel/statistical_decision_making}{\uline{source code}}}
+        \resumeItemListStart{}
+        \resumeItem{Creating a new machine learning white-box model from scratch}
+        \resumeItem{Creating a fuzzy inference system based on statistical inference}
+        \resumeItem{Solving a system of integral equations using Pytorch}
+        \resumeItemListEnd{}
+
+    \resumeTrioHeading{\href{https://drive.google.com/drive/u/0/folders/1q2EaWoaNGiwG4w1tQbm2k_c_2cM4j4Uv}{\uline{Machine learning of noise filtering of vibroacoustic linearly distributed sensor data}}}{Python, TensorFlow}{\href{https://github.com/RepnikovPavel/kursach_filtr_of_signal}{\uline{source code}}}
+        \resumeItemListStart{}
+          \resumeItem{Creating an optimal signal filter for recognizing different types of activity}
+        \resumeItemListEnd{}
+
+    %   \resumeTrioHeading{\href{https://drive.google.com/drive/u/0/folders/1q2EaWoaNGiwG4w1tQbm2k_c_2cM4j4Uv}{\uline{Machine learning of noise filtering of vibroacoustic 
+    %   linearly distributed sensor data}}}{Python,TensorFlow}{\href{https://github.com/RepnikovPavel/kursach_filtr_of_signal}{\uline{Source Code}}}
+    %     \resumeItemListStart{}
+    %     \resumeItem{Сreating an optimal signal filter for recognizing different types of activity}
+    %     \resumeItemListEnd{}
+
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+% %----------------OTHERS----------------------
+% % You can add your acheivements, accolades, certifications etc. here.
+
+% \section{Certifications}
+%   \resumeItemListStart{}
+%     \resumeItem{\href{https://dummy-certification.com}{\uline{Certified Web Developer by the W3C}}}
+%     \resumeItem{\href{https://dummy-certification.com}{\uline{Microsoft Certified: Azure Developer Associate}}}
+%     \resumeItem{\href{https://dummy-certification.com}{\uline{AWS Certified Developer - Associate}}}
+%   \resumeItemListEnd{}
+% %--------------------------------------------
+
+\end{document}
