@@ -1,1 +1,1 @@
-![link to googl drive file](https://drive.google.com/drive/u/1/folders/1IRnF4Vnb_p9hqf1hfrPLeCfhTEVA31ne)
+[link to the file on Google drive](https://drive.google.com/drive/u/1/folders/1IRnF4Vnb_p9hqf1hfrPLeCfhTEVA31ne)
